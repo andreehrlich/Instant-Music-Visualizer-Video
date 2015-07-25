@@ -1,8 +1,14 @@
+var capture;
 
 function setup() {
-
+  createCanvas(390, 240);
+  capture = createCapture(VIDEO);
+  capture.size(320, 240);
+  //capture.hide();
 }
 
 function draw() {
-  ellipse(50, 50, 80, 80);
+  background(255);
+  image(capture, 0, 0, 320, 240);
+  filter('INVERT');
 }
