@@ -8,7 +8,7 @@
 		<meta name="description" content="Visualize your favorite songs">
 
 		<title>VisualEyes</title>
-
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="./files/css">
 		<link rel="stylesheet" type="text/css" href="./files/main.css">
 
@@ -35,28 +35,30 @@
 				<img src="./files/Logo.png" alt="Logo" width="75%" height="25%" style="top: 5.7%;  left:30%;" >
 			</div>
 			
-		<form name="form_download" class="form" method="POST">
 			<input type="text" name="track_url" class="form__track-url" placeholder="Paste a link to the track page...">
-			<input type="submit" name="btn_download" class="button button--download" value="Visualize">
-		</form>
+			<div id="submitButton" class="button button--download" >Visualize<div>
 			
 		<script>
-		var urlString = 'https://soundcloud.com/tink_g/tink-i-like-prod-c-sick';
-		var dataToSend = JSON.stringify({'url':urlString});
-		console.log(dataToSend);
-	    $.ajax({ 
-	    	url: "/download",
-		    type: "POST",
-		    contentType: 'application/json',
-		    data: dataToSend , // pass that text to the server as a correct JSON String
-		    success: function (msg) { 
-		    	// alert(msg.d); 
-		    	//$('div').append('<audio controls><source src="horse.mp3" type="audio/mpeg"></audio>');
-	   		},
-	    error: function (type) { alert("ERROR!!" + type.responseText); }
-	    });
+		$('#submitButton').click( function() {
 
-		//$.post("/download", {urlString: urlString})
+			var urlString = $('.form__track-url').val();
+			console.log(urlString);
+			var dataToSend = JSON.stringify({'url':urlString});
+			console.log(dataToSend);
+		    $.ajax({ 
+		    	url: "/download",
+			    type: "POST",
+			    contentType: 'application/json',
+			    data: dataToSend , // pass that text to the server as a correct JSON String
+			    success: function (msg) { 
+			    	// alert(msg.d); 
+			    	//$('div').append('<audio controls><source src="horse.mp3" type="audio/mpeg"></audio>');
+		   		},
+		    error: function (type) { alert("ERROR!!" + type.responseText); }
+		    });
+
+			//$.post("/download", {urlString: urlString})
+		});
 	 </script>
 
 	</body>

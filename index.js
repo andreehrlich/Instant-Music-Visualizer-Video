@@ -23,8 +23,7 @@ app.get('/', function(req, res)
 
 app.post('/download', function(req, res) 
 {	
-	//var songURL = req.body.url;
-	var songURL = "https://soundcloud.com/tink_g/tink-i-like-prod-c-sick";
+	var songURL = req.body.url;
 	console.log(req.body);
 	console.log(songURL);
 	var cmd = 'cd public/songs && youtube-dl ' + songURL;
