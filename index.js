@@ -2,6 +2,7 @@ var express = require('express');
 var engine = require('consolidate');
 var sys = require('sys');
 var exec = require('child_process').exec;
+var bodyParser = require('body-parser');
 
 var child;
 var app = express();
@@ -11,16 +12,20 @@ app.set('views', __dirname + '/public');
 app.set('view engine', 'html');
 app.engine('html', engine.mustache);
 app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.get('/', function(req, res) 
 {
 	res.render('index.html');
 });
 
-app.get('/download', function(req, res) 
+app.post('/download', function(req, res) 
 {	
 	//var songURL = req.body.url;
 	var songURL = "https://soundcloud.com/tink_g/tink-i-like-prod-c-sick";
-	console.log(req);
+	console.log(req.body);
 	console.log(songURL);
 	var cmd = 'cd public/songs && youtube-dl ' + songURL;
 	exec(cmd, function(error, stdout, stderr) {
@@ -28,6 +33,8 @@ app.get('/download', function(req, res)
 	});
 	res.send("Yay!");
 });
+
+
 
 
 
