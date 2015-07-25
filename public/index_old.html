@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	</head>
+	<body>
+		<div> 
+			<p> This is html!!!! </p>
+
+			<script>
+
+
+				var urlString = 'https://soundcloud.com/tink_g/tink-i-like-prod-c-sick';
+				var dataToSend = JSON.stringify({'url':urlString});
+			    $.ajax({ url: "/download",
+			    type: "GET",
+			    data: dataToSend , // pass that text to the server as a correct JSON String
+			    success: function (msg) { 
+			    	alert(msg.d); 
+			    	//$('div').append('<audio controls><source src="horse.mp3" type="audio/mpeg"></audio>');
+			    },
+			    error: function (type) { alert("ERROR!!" + type.responseText); }
+			    });
+		     </script>
+		</div>
+	</body>
+</html>
