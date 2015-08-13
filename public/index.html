@@ -1,65 +1,72 @@
 <!DOCTYPE html>
 
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="author" content="VisualEyes">
-		<meta name="description" content="Visualize your favorite songs">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-1.11.2.min.js" async></script>
+	<script async src="js/bootstrap.min.js"></script>
+	<!-- info -->
+	<meta name="author" content="VisualEyes">
+	<meta name="description" content="Visualize your favorite songs">
+	<title>VisualEyes</title>
+	<!-- api -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="./files/css">
+	<link rel="stylesheet" type="text/css" href="./files/main.css">
+	<link rel="stylesheet" type="text/css" href="indexstyler.css">
+	<style type="text/css"></style>
+</head>
 
-		<title>VisualEyes</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="./files/css">
-		<link rel="stylesheet" type="text/css" href="./files/main.css">
-
-		<style type="text/css"></style>
-	</head>
-
-	<body>
-
-		<div class="nav">
-			<div class="nav__left">
-			<a href="./info.html">Info</a>
-			</div>
-
-			<div class="nav__right">
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2 nav homebutton">
 				<a href="./index.html">Home</a>
-				
 			</div>
 		</div>
 
-		<div class="container" style="position: absolute; top: 188px; left: 350px;">
-			
-			<div class="intro">
-
-				<img src="./files/Logo.png" alt="Logo" width="75%" height="25%" style="top: 5.7%;  left:30%;" >
+		<div class="row logo">
+			<div class="col-md-8">
+				<img class = "img-responsive" src="./files/Logo.png" alt="Logo">
 			</div>
-			
-			<input type="text" name="track_url" class="form__track-url" placeholder="Paste a link to the track page...">
-			<a href="/visualizer.html"><div id="submitButton" class="button button--download" >Visualize</div></a>
-			
-		<script>
-		$('#submitButton').click( function() {
+		</div>
 
-			var urlString = $('.form__track-url').val();
-			console.log(urlString);
-			var dataToSend = JSON.stringify({'url':urlString});
-			console.log(dataToSend);
-		    $.ajax({ 
-		    	url: "/download",
-			    type: "POST",
-			    contentType: 'application/json',
-			    data: dataToSend , // pass that text to the server as a correct JSON String
-			    success: function (msg) { 
-			    	// alert(msg.d); 
-			    	//$('div').append('<audio controls><source src="horse.mp3" type="audio/mpeg"></audio>');
-		   		},
-		    error: function (type) { alert("ERROR!!" + type.responseText); }
-		    });
+		<div class="row">
+			<div class="col-md-8 url-input">
+				<input type="text" name="track_url" class="form__track-url" placeholder="Paste a link to the track on YouTube or SoundCloud...">
+				<a href="/visualizer.html"><div id="submitButton" class="button button--download" >Visualize</div></a>
 
-			//$.post("/download", {urlString: urlString})
-		});
-	 </script>
-
-	</body>
+				<script>
+				$('#submitButton').click( function() {
+					var urlString = $('.form__track-url').val();
+					console.log(urlString);
+					var dataToSend = JSON.stringify({'url':urlString});
+					console.log(dataToSend);
+					$.ajax({ 
+						url: "/download",
+						type: "POST",
+						contentType: 'application/json',
+					    data: dataToSend , // pass that text to the server as a correct JSON String
+					    success: function (msg) { 
+					    	// alert(msg.d); 
+					    	//$('div').append('<audio controls><source src="horse.mp3" type="audio/mpeg"></audio>');
+					    },
+					    error: function (type) { alert("ERROR!!" + type.responseText); }
+					});
+					//$.post("/download", {urlString: urlString})
+				});
+				</script>
+			</div>
+		</div>
+		
+		<div class="row ">
+			<div class="col-md-4 explanation justify">
+				<h6>Created during a Musical Instrument Hackathon in NYC, by three University students. We wanted to create something visual from music. We discovered a cool javascript library called P5.JS.</h6>
+			</div>
+		</div>
+	</div>
+</body>
 </html>
