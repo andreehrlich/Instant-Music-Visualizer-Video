@@ -17,7 +17,7 @@ function setup() {
   amplitude = new p5.Amplitude();
   myDiv = createDiv();
   myDiv.size([1600], [900]);
- 
+
   myDiv.style("top", "0");
   myDiv.style("position", "fixed");
   myDiv.style("z-index", "1000");

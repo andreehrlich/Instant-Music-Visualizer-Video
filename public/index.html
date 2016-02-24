@@ -24,42 +24,47 @@
 
 			<div class="nav__right">
 				<a href="./index.html">Home</a>
-				
+
 			</div>
 		</div>
 
-		<div class="container" style="position: absolute; top: 188px; left: 350px;">
-			
+		<div class="container" style="top: 188px; left: 150px;">
+
 			<div class="intro">
 
 				<img src="./files/Logo.png" alt="Logo" width="75%" height="25%" style="top: 5.7%;  left:30%;" >
 			</div>
-			
+
 			<input type="text" name="track_url" class="form__track-url" placeholder="Paste a link to the track page...">
-			<a href="/visualizer.html"><div id="submitButton" class="button button--download" >Visualize</div></a>
-			
-		<script>
-		$('#submitButton').click( function() {
+			<a href="/visualizer.html">
+				<div id="submitButton" class="button button--download">
+					Visualize
+				</div>
+			</a>
 
-			var urlString = $('.form__track-url').val();
-			console.log(urlString);
-			var dataToSend = JSON.stringify({'url':urlString});
-			console.log(dataToSend);
-		    $.ajax({ 
-		    	url: "/download",
-			    type: "POST",
-			    contentType: 'application/json',
-			    data: dataToSend , // pass that text to the server as a correct JSON String
-			    success: function (msg) { 
-			    	// alert(msg.d); 
-			    	//$('div').append('<audio controls><source src="horse.mp3" type="audio/mpeg"></audio>');
-		   		},
-		    error: function (type) { alert("ERROR!!" + type.responseText); }
-		    });
+			<script>
+				$('#submitButton').click( function() {
 
-			//$.post("/download", {urlString: urlString})
-		});
-	 </script>
+					var urlString = $('.form__track-url').val();
+					console.log(urlString);
+					var dataToSend = JSON.stringify({'url':urlString});
+					console.log(dataToSend);
+				    $.ajax({
+				    	url: "/download",
+					    type: "POST",
+					    contentType: 'application/json',
+					    data: dataToSend , // pass that text to the server as a correct JSON String
+					    success: function (msg) {
+					    	// alert(msg.d);
+					    	//$('div').append('<audio controls><source src="horse.mp3" type="audio/mpeg"></audio>');
+				   		},
+				    error: function (type) { alert("ERROR!!" + type.responseText); }
+				    });
+
+					//$.post("/download", {urlString: urlString})
+				});
+			</script>
+		</div>
 
 	</body>
 </html>
